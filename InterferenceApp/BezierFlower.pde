@@ -64,6 +64,17 @@ class BezierFlower {
     }
   }
 
+  String toString() {
+    return "new BezierFlower()\n"
+      + "\t.numPoints(" + numPoints + ")\n"
+      + "\t.innerRadius(" + numPoints + ")\n"
+      + "\t.outerRadius(" + outerRadius + ")\n"
+      + "\t.innerControlDistanceFactor(" + innerControlDistanceFactor + ")\n"
+      + "\t.outerControlDistanceFactor(" + outerControlDistanceFactor + ")\n"
+      + "\t.innerControlRotation(" + innerControlRotation + ")\n"
+      + "\t.outerControlRotation(" + outerControlRotation + ")";
+  }
+
   private void drawPoint(PGraphics g, int index) {
     int prevIndex = index - 1;
     PVector prevPoint = getPoint(prevIndex);

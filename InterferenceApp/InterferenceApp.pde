@@ -86,6 +86,9 @@ void draw() {
 
   g.popStyle();
   g.popMatrix();
+
+  g.text(getSettings(),
+      20, 20);
 }
 
 void zero() {
@@ -94,10 +97,22 @@ void zero() {
   }
 }
 
+String getSettings() {
+  return bezierFlower0.toString() + "\n\n"
+      + bezierFlower1.toString() + "\n\n"
+      + "num flowers: " + numFlowers + "\n"
+      + "x offset: " + xOffset + "\n"
+      + "y offset: " + yOffset + "\n"
+      + "rotation offset: " + rotationOffset + "\n";
+}
+
 void keyReleased() {
   switch (key) {
     case 'r':
       save(fileNamer.next());
+      break;
+    case 's':
+      println(getSettings());
       break;
   }
 }
