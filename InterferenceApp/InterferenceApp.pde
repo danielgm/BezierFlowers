@@ -10,7 +10,7 @@ FileNamer fileNamer;
 FileNamer settingsFileNamer;
 
 void setup() {
-  size(640, 480, P2D);
+  size(1920, 1080, P2D);
 
   beziers = new InterferingBeziers();
   beziers.updateFromJSONObject(loadJSONObject("settings.json"));
@@ -24,8 +24,8 @@ void setup() {
   float outerRadius = width-x0;
   RadialGradient gradient = new RadialGradient(
       x0, y0, innerRadius, x0 + 0.2 * width, y0, outerRadius);
-  gradient.addColorStop(0, 0xff5bff69);
-  gradient.addColorStop(1, 0xff66ffec);
+  gradient.addColorStop(0, 0xff85e4ff);
+  gradient.addColorStop(1, 0xff252e75);
 
   gradientCanvas = createGraphics(width, height, P2D);
   gradient.fillRect(gradientCanvas, 0, 0, width, height, false);
@@ -42,7 +42,7 @@ void draw() {
   g.pushStyle();
 
   g.noFill();
-  g.stroke(0xfff375b0);
+  g.stroke(0xff000000);
   g.strokeWeight(4);
 
   g.pushMatrix();

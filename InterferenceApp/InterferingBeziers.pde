@@ -7,6 +7,7 @@ class InterferingBeziers {
   BezierFlower bezierFlower0;
   BezierFlower bezierFlower1;
 
+  float scaleFactor;
   float xOffset;
   float yOffset;
   float rotationOffset;
@@ -32,7 +33,7 @@ class InterferingBeziers {
   void draw(PGraphics g) {
     for (int i = 0; i < numFlowers; i++) {
       g.pushMatrix();
-      g.scale(1.7 * i / numFlowers);
+      g.scale(scaleFactor * i / numFlowers);
       g.rotate(i * rotationDelta);
 
       bezierFlower0.draw(g);
@@ -55,6 +56,7 @@ class InterferingBeziers {
     json.setJSONObject("flower1", bezierFlower1.toJSONObject());
 
     json.setInt("numFlowers", numFlowers);
+    json.setFloat("scaleFactor", scaleFactor);
     json.setFloat("xOffset", xOffset);
     json.setFloat("yOffset", yOffset);
     json.setFloat("rotationOffset", rotationOffset);
@@ -68,6 +70,7 @@ class InterferingBeziers {
     bezierFlower1.updateFromJSONObject(json.getJSONObject("flower1"));
 
     numFlowers = json.getInt("numFlowers");
+    scaleFactor = json.getFloat("scaleFactor");
     xOffset = json.getFloat("xOffset");
     yOffset = json.getFloat("yOffset");
     rotationOffset = json.getFloat("rotationOffset");
@@ -118,24 +121,24 @@ class InterferingBeziers {
 
       case 4:
         println("inner control rotation");
-        value = midiMap(midiValue, 0, 2 * PI);
+        value = midiMap(midiValue, -PI, PI);
         bezierFlower0.innerControlRotation(value);
         bezierFlower1.innerControlRotation(value);
         break;
       case 5:
         println("outer control rotation");
-        value = midiMap(midiValue, 0, 2 * PI);
+        value = midiMap(midiValue, -PI, PI);
         bezierFlower0.outerControlRotation(value);
         bezierFlower1.outerControlRotation(value);
         break;
 
       case 6:
         println("x offset");
-        xOffset = midiMap(midiValue, 0, 100);
+        xOffset = midiMap(midiValue, -20, 20);
         break;
       case 7:
         println("y offset");
-        yOffset = midiMap(midiValue, 0, 100);
+        yOffset = midiMap(midiValue, -20, 20);
         break;
 
       // Knobs.
@@ -153,20 +156,23 @@ class InterferingBeziers {
 
       case 18:
         println("rotation offset");
-        rotationOffset = midiMap(midiValue, 0, 2 * PI / bezierFlower0.numPoints());
+        rotationOffset = midiMap(midiValue, 0, PI / bezierFlower0.numPoints());
         break;
       case 19:
         println("rotation delta");
-        value = midiMap(midiValue, 0, 0.01 * PI);
+        value = midiMap(midiValue, -0.01, 0.01 * PI);
         rotationDelta = value;
         break;
 
       case 20:
         println("rotation delta offset");
-        value = midiMap(midiValue, 0, 0.01 * PI);
+        value = midiMap(midiValue, -0.01, 0.01) * PI;
         rotationDeltaOffset = value;
         break;
       case 21:
+        println("scale factor");
+        value = midiMap(midiValue, 0.5, 3);
+        scaleFactor = value;
         break;
 
       case 22:
