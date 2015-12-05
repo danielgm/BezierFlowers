@@ -64,6 +64,28 @@ class BezierFlower {
     }
   }
 
+  JSONObject toJSONObject() {
+    JSONObject json = new JSONObject();
+    json.setInt("numPoints", numPoints);
+    json.setFloat("innerRadius", innerRadius);
+    json.setFloat("outerRadius", outerRadius);
+    json.setFloat("innerControlDistanceFactor", innerControlDistanceFactor);
+    json.setFloat("outerControlDistanceFactor", outerControlDistanceFactor);
+    json.setFloat("innerControlRotation", innerControlRotation);
+    json.setFloat("outerControlRotation", outerControlRotation);
+    return json;
+  }
+
+  void updateFromJSONObject(JSONObject json) {
+    numPoints = json.getInt("numPoints");
+    innerRadius = json.getFloat("innerRadius");
+    outerRadius = json.getFloat("outerRadius");
+    innerControlDistanceFactor = json.getFloat("innerControlDistanceFactor");
+    outerControlDistanceFactor = json.getFloat("outerControlDistanceFactor");
+    innerControlRotation = json.getFloat("innerControlRotation");
+    outerControlRotation = json.getFloat("outerControlRotation");
+  }
+
   String toString() {
     return "new BezierFlower()\n"
       + "\t.numPoints(" + numPoints + ")\n"
@@ -102,7 +124,7 @@ class BezierFlower {
   private float getRadius(int index) {
     return index % 2 == 0 ? innerRadius : outerRadius;
   }
-  
+
   private PVector getTangent(int index) {
     PVector p = new PVector(1, 0);
     p.rotate(index * PI / numPoints + PI / 2);
