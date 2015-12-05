@@ -14,6 +14,8 @@ PGraphics gradientCanvas;
 float xOffset;
 float yOffset;
 float rotationOffset;
+float rotationDelta;
+float rotationDeltaOffset;
 
 FileNamer fileNamer;
 
@@ -70,12 +72,13 @@ void draw() {
   for (int i = 0; i < numFlowers; i++) {
     g.pushMatrix();
     g.scale(1.7 * i / numFlowers);
+    g.rotate(i * rotationDelta);
 
     bezierFlower0.draw(g);
 
     g.pushMatrix();
     g.translate(xOffset, yOffset);
-    g.rotate(rotationOffset);
+    g.rotate(rotationOffset + i * rotationDeltaOffset);
 
     bezierFlower1.draw(g);
 
@@ -192,9 +195,15 @@ void controllerChange(int channel, int number, int midiValue) {
       rotationOffset = midiMap(midiValue, 0, 2 * PI / bezierFlower0.numPoints());
       break;
     case 19:
+      println("rotation delta");
+      value = midiMap(midiValue, 0, 0.01 * PI);
+      rotationDelta = value;
       break;
 
     case 20:
+      println("rotation delta offset");
+      value = midiMap(midiValue, 0, 0.01 * PI);
+      rotationDeltaOffset = value;
       break;
     case 21:
       break;
