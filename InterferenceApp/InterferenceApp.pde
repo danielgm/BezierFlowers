@@ -35,8 +35,6 @@ void setup() {
 }
 
 void draw() {
-  int rotationFrameCount = 2000;
-
   g.image(gradientCanvas, 0, 0);
 
   g.pushStyle();
@@ -47,7 +45,6 @@ void draw() {
 
   g.pushMatrix();
   g.translate(width/2, height/2);
-  g.rotate(frameCount % rotationFrameCount * 2 * PI / rotationFrameCount);
 
   beziers.draw(g);
 
