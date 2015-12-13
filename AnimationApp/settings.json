@@ -1,0 +1,27 @@
+{
+  "yOffset": -0.625,
+  "rotationDelta": -9.402651339769363E-4,
+  "xOffset": 0,
+  "scaleFactor": 0.526562511920929,
+  "numFlowers": 254,
+  "flower1": {
+    "numPoints": 3,
+    "innerControlDistanceFactor": 0.31334373354911804,
+    "outerRadius": 1025,
+    "innerControlRotation": 0,
+    "outerControlRotation": 0,
+    "outerControlDistanceFactor": 0.20402343571186066,
+    "innerRadius": 965
+  },
+  "rotationDeltaOffset": 0,
+  "rotationOffset": 0.07526732981204987,
+  "flower0": {
+    "numPoints": 3,
+    "innerControlDistanceFactor": 0.31334373354911804,
+    "outerRadius": 1025,
+    "innerControlRotation": 0,
+    "outerControlRotation": 0,
+    "outerControlDistanceFactor": 0.20402343571186066,
+    "innerRadius": 965
+  }
+}
