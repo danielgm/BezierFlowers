@@ -10,7 +10,7 @@ FileNamer fileNamer;
 FileNamer settingsFileNamer;
 
 void setup() {
-  size(1920, 1080, P2D);
+  size(640, 640, P2D);
 
   beziers = new InterferingBeziers();
   beziers.updateFromJSONObject(loadJSONObject("settings.json"));
