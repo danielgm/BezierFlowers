@@ -3,16 +3,16 @@ class InterferingBeziers {
   final int MIDI_MIN = 0;
   final int MIDI_MAX = 128;
 
-  int numFlowers;
-  BezierFlower bezierFlower0;
-  BezierFlower bezierFlower1;
+  private int numFlowers;
+  private BezierFlower bezierFlower0;
+  private BezierFlower bezierFlower1;
 
-  float scaleFactor;
-  float xOffset;
-  float yOffset;
-  float rotationOffset;
-  float rotationDelta;
-  float rotationDeltaOffset;
+  private float scaleFactor;
+  private float xOffset;
+  private float yOffset;
+  private float rotationOffset;
+  private float rotationDelta;
+  private float rotationDeltaOffset;
 
   InterferingBeziers() {
     numFlowers = 50;
@@ -28,6 +28,87 @@ class InterferingBeziers {
       .outerRadius(500);
 
     zero();
+  }
+
+  int numFlowers() {
+    return numFlowers;
+  }
+
+  InterferingBeziers numFlowers(int v) {
+    numFlowers = v;
+    return this;
+  }
+
+  BezierFlower bezierFlower0() {
+    return bezierFlower0;
+  }
+
+  InterferingBeziers bezierFlower0(BezierFlower v) {
+    bezierFlower0 = v;
+    return this;
+  }
+
+  BezierFlower bezierFlower1() {
+    return bezierFlower1;
+  }
+
+  InterferingBeziers bezierFlower1(BezierFlower v) {
+    bezierFlower1 = v;
+    return this;
+  }
+
+  float scaleFactor() {
+    return scaleFactor;
+  }
+
+  InterferingBeziers scaleFactor(float v) {
+    scaleFactor = v;
+    return this;
+  }
+
+  float xOffset() {
+    return xOffset;
+  }
+
+  InterferingBeziers xOffset(float v) {
+    xOffset = v;
+    return this;
+  }
+
+  float yOffset() {
+    return yOffset;
+  }
+
+  InterferingBeziers yOffset(float v) {
+    yOffset = v;
+    return this;
+  }
+
+  float rotationOffset() {
+    return rotationOffset;
+  }
+
+  InterferingBeziers rotationOffset(float v) {
+    rotationOffset = v;
+    return this;
+  }
+
+  float rotationDelta() {
+    return rotationDelta;
+  }
+
+  InterferingBeziers rotationDelta(float v) {
+    rotationDelta = v;
+    return this;
+  }
+
+  float rotationDeltaOffset() {
+    return rotationDeltaOffset;
+  }
+
+  InterferingBeziers rotationDeltaOffset(float v) {
+    rotationDeltaOffset = v;
+    return this;
   }
 
   void draw(PGraphics g) {
