@@ -64,6 +64,24 @@ class BezierFlower {
     }
   }
 
+  BezierFlower interpolate(BezierFlower b, float t) {
+    BezierFlower a = this;
+    BezierFlower result = new BezierFlower()
+      .numPoints(floor(mapt(t, a.numPoints, b.numPoints)))
+      .innerRadius(mapt(t, a.innerRadius, b.innerRadius))
+      .outerRadius(mapt(t, a.outerRadius, b.outerRadius))
+      .innerControlDistanceFactor(mapt(t, a.innerControlDistanceFactor, b.innerControlDistanceFactor))
+      .outerControlDistanceFactor(mapt(t, a.outerControlDistanceFactor, b.outerControlDistanceFactor))
+      .innerControlRotation(mapt(t, a.innerControlRotation, b.innerControlRotation))
+      .outerControlRotation(mapt(t, a.outerControlRotation, b.outerControlRotation));
+
+    return result;
+  }
+
+  private float mapt(float t, float low, float high) {
+    return map(t, 0, 1, low, high);
+  }
+
   JSONObject toJSONObject() {
     JSONObject json = new JSONObject();
     json.setInt("numPoints", numPoints);

@@ -1,21 +1,27 @@
 
 import themidibus.*;
 
-InterferingBeziers beziers;
+int loopFrameCount;
+
+InterferingBeziers beziers0;
+InterferingBeziers beziers1;
 MidiBus bus;
 
 PGraphics gradientCanvas;
 
 FileNamer fileNamer;
-FileNamer settingsFileNamer;
 
 color strokeColor, backgroundColor0, backgroundColor1;
 
 void setup() {
   size(640, 640, P2D);
 
-  beziers = new InterferingBeziers();
-  beziers.updateFromJSONObject(loadJSONObject("settings.json"));
+  loopFrameCount = 300;
+
+  beziers0 = new InterferingBeziers();
+  beziers0.updateFromJSONObject(loadJSONObject("settings0.json"));
+  beziers1 = new InterferingBeziers();
+  beziers1.updateFromJSONObject(loadJSONObject("settings1.json"));
 
   MidiBus.list();
   bus = new MidiBus(this, 0, 1);
@@ -36,11 +42,19 @@ void setup() {
   gradientCanvas = createGraphics(width, height, P2D);
   gradient.fillRect(gradientCanvas, 0, 0, width, height, false);
 
-  fileNamer = new FileNamer("output/export", "png");
-  settingsFileNamer = new FileNamer("output/settings", "json");
+  fileNamer = new FileNamer("output/output", "/");
 }
 
 void draw() {
+  float t = (float)(frameCount % loopFrameCount) / loopFrameCount;
+  draw(g, t);
+}
+
+void draw(PGraphics g, float t) {
+  float rotation = map(t, 0, 1, 0, 2 * PI);
+  t = (t < 0.5 ? t : 1 - t) / 0.5;
+  InterferingBeziers beziers = beziers0.interpolate(beziers1, t);
+
   g.image(gradientCanvas, 0, 0);
 
   g.pushStyle();
@@ -51,6 +65,7 @@ void draw() {
 
   g.pushMatrix();
   g.translate(width/2, height/2);
+  g.rotate(rotation);
 
   beziers.draw(g);
 
@@ -58,18 +73,26 @@ void draw() {
   g.popMatrix();
 }
 
+void saveAnimation() {
+  String dir = fileNamer.next();
+
+  PGraphics g = createGraphics(width, height, P2D);
+  for (int i = 0; i < loopFrameCount; i++) {
+    g.beginDraw();
+    draw(g, (float)i / loopFrameCount);
+    g.endDraw();
+    g.save(dir + "frame" + nf(i, 4) + ".png");
+  }
+}
+
 void keyReleased() {
   switch (key) {
     case 'r':
-      save(fileNamer.next());
-      break;
-    case 's':
-      saveJSONObject(beziers.toJSONObject(), settingsFileNamer.next());
+      saveAnimation();
       break;
   }
 }
 
 void controllerChange(int channel, int number, int value) {
-  beziers.controllerChange(channel, number, value);
-  saveJSONObject(beziers.toJSONObject(), "settings.json");
 }
+

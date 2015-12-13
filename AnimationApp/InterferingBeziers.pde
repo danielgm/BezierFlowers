@@ -26,8 +26,6 @@ class InterferingBeziers {
       .numPoints(5)
       .innerRadius(250)
       .outerRadius(500);
-
-    zero();
   }
 
   int numFlowers() {
@@ -131,6 +129,27 @@ class InterferingBeziers {
     }
   }
 
+  InterferingBeziers interpolate(InterferingBeziers b, float t) {
+    InterferingBeziers a = this;
+
+    InterferingBeziers result = new InterferingBeziers()
+      .numFlowers(floor(mapt(t, a.numFlowers, b.numFlowers)))
+      .scaleFactor(mapt(t, a.scaleFactor, b.scaleFactor))
+      .bezierFlower0(a.bezierFlower0.interpolate(b.bezierFlower0, t))
+      .bezierFlower1(a.bezierFlower1.interpolate(b.bezierFlower1, t))
+      .xOffset(mapt(t, a.xOffset, b.xOffset))
+      .yOffset(mapt(t, a.yOffset, b.yOffset))
+      .rotationOffset(mapt(t, a.rotationOffset, b.rotationOffset))
+      .rotationDelta(mapt(t, a.rotationDelta, b.rotationDelta))
+      .rotationDeltaOffset(mapt(t, a.rotationDeltaOffset, b.rotationDeltaOffset));
+
+    return result;
+  }
+
+  private float mapt(float t, float low, float high) {
+    return map(t, 0, 1, low, high);
+  }
+
   JSONObject toJSONObject() {
     JSONObject json = new JSONObject();
     json.setJSONObject("flower0", bezierFlower0.toJSONObject());
@@ -157,12 +176,6 @@ class InterferingBeziers {
     rotationOffset = json.getFloat("rotationOffset");
     rotationDelta = json.getFloat("rotationDelta");
     rotationDeltaOffset = json.getFloat("rotationDeltaOffset");
-  }
-
-  private void zero() {
-    for (int i = 0; i < 24; i++) {
-      controllerChange(0, i, MIDI_MIN);
-    }
   }
 
   void controllerChange(int channel, int number, int midiValue) {
