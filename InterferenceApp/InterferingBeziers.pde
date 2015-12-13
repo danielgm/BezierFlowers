@@ -94,84 +94,89 @@ class InterferingBeziers {
       // Sliders.
 
       case 0:
-        println("inner radius");
         value = midiMap(midiValue, width/2, width * 2);
+        println("inner radius", value);
         bezierFlower0.innerRadius(value);
         bezierFlower1.innerRadius(value);
         break;
       case 1:
-        println("outer radius");
         value = midiMap(midiValue, width/2, width * 2);
+        println("outer radius", value);
         bezierFlower0.outerRadius(value);
         bezierFlower1.outerRadius(value);
         break;
 
       case 2:
-        println("inner control distance factor");
         value = midiMap(midiValue, 0.001, 2);
+        println("inner control distance factor", value);
         bezierFlower0.innerControlDistanceFactor(value);
         bezierFlower1.innerControlDistanceFactor(value);
         break;
       case 3:
-        println("outer control distance factor");
         value = midiMap(midiValue, 0.001, 2);
+        println("outer control distance factor", value);
         bezierFlower0.outerControlDistanceFactor(value);
         bezierFlower1.outerControlDistanceFactor(value);
         break;
 
       case 4:
-        println("inner control rotation");
         value = midiMap(midiValue, -PI, PI);
+        println("inner control rotation", value);
         bezierFlower0.innerControlRotation(value);
         bezierFlower1.innerControlRotation(value);
         break;
       case 5:
-        println("outer control rotation");
         value = midiMap(midiValue, -PI, PI);
+        println("outer control rotation", value);
         bezierFlower0.outerControlRotation(value);
         bezierFlower1.outerControlRotation(value);
         break;
 
       case 6:
-        println("x offset");
-        xOffset = midiMap(midiValue, -20, 20);
+        value = midiMap(midiValue, -20, 20);
+        println("x offset", value);
+        xOffset = value;
         break;
       case 7:
-        println("y offset");
-        yOffset = midiMap(midiValue, -20, 20);
+        value = midiMap(midiValue, -20, 20);
+        println("y offset", value);
+        yOffset = value;
         break;
 
       // Knobs.
 
       case 16:
-        println("num points");
-        intValue = floor(midiMap(midiValue, 1, 12));
+        value = midiMap(midiValue, 1, 12);
+        println("num points", value);
+        intValue = floor(value);
         bezierFlower0.numPoints(intValue);
         bezierFlower1.numPoints(intValue);
         break;
       case 17:
-        println("num flowers");
-        numFlowers = floor(midiMap(midiValue, 1, 256));
+        value = midiMap(midiValue, 1, 256);
+        println("num flowers", value);
+        numFlowers = floor(value);
         break;
 
       case 18:
-        println("rotation offset");
-        rotationOffset = midiMap(midiValue, 0, PI / bezierFlower0.numPoints());
+        value = midiMap(midiValue, 0, 0.2 * 2 * PI / bezierFlower0.numPoints());
+        println("rotation offset", value * 180 / PI);
+        rotationOffset = value;
         break;
       case 19:
-        println("rotation delta");
         value = midiMap(midiValue, -0.01, 0.01 * PI);
+        println("rotation delta", value * 180 / PI);
         rotationDelta = value;
         break;
 
       case 20:
-        println("rotation delta offset");
-        value = midiMap(midiValue, -0.01, 0.01) * PI;
+        value = midiMap(midiValue, -0.001, 0.001) * PI;
+        println("rotation delta offset", value * 180 / PI);
         rotationDeltaOffset = value;
         break;
       case 21:
-        println("scale factor");
         value = midiMap(midiValue, 0.5, 3);
+        println("scale factor", value);
         scaleFactor = value;
         break;
 
