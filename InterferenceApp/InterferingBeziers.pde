@@ -153,7 +153,7 @@ class InterferingBeziers {
         bezierFlower1.numPoints(intValue);
         break;
       case 17:
-        value = midiMap(midiValue, 1, 256);
+        value = midiMap(midiValue, 128, 1024);
         println("num flowers", value);
         numFlowers = floor(value);
         break;
@@ -175,7 +175,7 @@ class InterferingBeziers {
         rotationDeltaOffset = value;
         break;
       case 21:
-        value = midiMap(midiValue, 0.5, 3);
+        value = midiMap(midiValue, 0.1, 1.5);
         println("scale factor", value);
         scaleFactor = value;
         break;
