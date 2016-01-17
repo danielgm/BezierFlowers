@@ -26,9 +26,9 @@ void setup() {
   MidiBus.list();
   bus = new MidiBus(this, 0, 1);
 
-  strokeColor = 0xff193569;
-  backgroundColor0 = 0xff193569;
-  backgroundColor1 = 0xff4eb0e9;
+  strokeColor = 0xff030303;
+  backgroundColor0 = 0xff69d3ce;
+  backgroundColor1 = 0xff887abf;
 
   float x0 = 0.3 * width;
   float y0 = -0.2 * height;
@@ -51,8 +51,8 @@ void draw() {
 }
 
 void draw(PGraphics g, float t) {
-  float rotation = map(t, 0, 1, 0, 2 * PI);
-  t = (t < 0.5 ? t : 1 - t) / 0.5;
+  t = remapTime(t);
+
   InterferingBeziers beziers = beziers0.interpolate(beziers1, t);
 
   g.image(gradientCanvas, 0, 0);
@@ -65,12 +65,22 @@ void draw(PGraphics g, float t) {
 
   g.pushMatrix();
   g.translate(width/2, height/2);
-  g.rotate(rotation);
 
   beziers.draw(g);
 
   g.popStyle();
   g.popMatrix();
+}
+
+float remapTime(float t) {
+  float amplitude = 0.1;
+  float frequency = 7;
+
+  float frequencyFactor = frequency * 2 - 1;
+  float mapped = (t < 0.5 ? t : 1 - t) / 0.5;
+  mapped += amplitude * sin(frequencyFactor * PI * t);
+
+  return mapped;
 }
 
 void saveAnimation() {
@@ -95,4 +105,3 @@ void keyReleased() {
 
 void controllerChange(int channel, int number, int value) {
 }
-
