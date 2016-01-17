@@ -1,6 +1,8 @@
 
 import themidibus.*;
 
+PImage background;
+
 InterferingBeziers beziers;
 MidiBus bus;
 
@@ -14,15 +16,17 @@ color strokeColor, backgroundColor0, backgroundColor1;
 void setup() {
   size(640, 640, P2D);
 
+  background = loadImage("dogmountain.jpg");
+
   beziers = new InterferingBeziers();
   beziers.updateFromJSONObject(loadJSONObject("settings.json"));
 
   MidiBus.list();
   bus = new MidiBus(this, 0, 1);
 
-  strokeColor = 0xffbfd450;
-  backgroundColor0 = 0xff193569;
-  backgroundColor1 = 0xff4eb0e9;
+  strokeColor = 0xff030303;
+  backgroundColor0 = 0xff69d3ce;
+  backgroundColor1 = 0xff887abf;
 
   float x0 = 0.3 * width;
   float y0 = -0.2 * height;
@@ -41,8 +45,35 @@ void setup() {
 }
 
 void draw() {
-  g.image(gradientCanvas, 0, 0);
+  drawBackground();
+  drawGradient();
+  drawInterference();
+}
 
+void drawBackground() {
+  float scale;
+  if (background.width / width < background.height / height) {
+    scale = (float)width / background.width;
+  }
+  else {
+    scale = (float)height / background.height;
+  }
+
+  g.pushStyle();
+  g.imageMode(CENTER);
+  g.image(background, width/2, height/2, background.width * scale, background.height * scale);
+  g.popStyle();
+}
+
+void drawGradient() {
+  g.pushStyle();
+  g.blendMode(ADD);
+  g.tint(255, 60);
+  g.image(gradientCanvas, 0, 0);
+  g.popStyle();
+}
+
+void drawInterference() {
   g.pushStyle();
 
   g.noFill();
