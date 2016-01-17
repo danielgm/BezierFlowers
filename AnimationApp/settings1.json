@@ -1,27 +1,27 @@
 {
-  "yOffset": -10,
-  "rotationDelta": -9.402651339769363E-4,
-  "xOffset": 0,
-  "scaleFactor": 0.526562511920929,
-  "numFlowers": 254,
+  "yOffset": 18.125,
+  "rotationDelta": -0.0025580748915672302,
+  "xOffset": 19.6875,
+  "scaleFactor": 0.745312511920929,
+  "numFlowers": 191,
   "flower1": {
-    "numPoints": 3,
-    "innerControlDistanceFactor": 0.31334373354911804,
-    "outerRadius": 1025,
+    "numPoints": 5,
+    "innerControlDistanceFactor": 0.09470312297344208,
+    "outerRadius": 1272.5,
     "innerControlRotation": 0,
     "outerControlRotation": 0,
     "outerControlDistanceFactor": 0.20402343571186066,
-    "innerRadius": 965
+    "innerRadius": 717.5
   },
-  "rotationDeltaOffset": 0,
-  "rotationOffset": -0.07526732981204987,
+  "rotationDeltaOffset": -0.0013253595679998398,
+  "rotationOffset": 0.011453723534941673,
   "flower0": {
-    "numPoints": 3,
-    "innerControlDistanceFactor": 0.31334373354911804,
-    "outerRadius": 1025,
+    "numPoints": 5,
+    "innerControlDistanceFactor": 0.09470312297344208,
+    "outerRadius": 1272.5,
     "innerControlRotation": 0,
     "outerControlRotation": 0,
     "outerControlDistanceFactor": 0.20402343571186066,
-    "innerRadius": 965
+    "innerRadius": 717.5
   }
 }

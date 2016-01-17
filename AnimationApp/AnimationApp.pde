@@ -26,9 +26,9 @@ void setup() {
   MidiBus.list();
   bus = new MidiBus(this, 0, 1);
 
-  strokeColor = 0xff030303;
-  backgroundColor0 = 0xff69d3ce;
-  backgroundColor1 = 0xff887abf;
+  strokeColor = 0xff39545d;
+  backgroundColor0 = 0xff49b6b0;
+  backgroundColor1 = 0xffaeae94;
 
   float x0 = 0.3 * width;
   float y0 = -0.2 * height;
@@ -74,11 +74,9 @@ void draw(PGraphics g, float t) {
 
 float remapTime(float t) {
   float amplitude = 0.1;
-  float frequency = 7;
-
-  float frequencyFactor = frequency * 2 - 1;
-  float mapped = (t < 0.5 ? t : 1 - t) / 0.5;
-  mapped += amplitude * sin(frequencyFactor * PI * t);
+  float frequencyFactor = 14;
+  float mapped = cos((2 * t + 1) * PI) + 0.5;
+  mapped += amplitude * cos(PI * (frequencyFactor * t + 1));
 
   return mapped;
 }
