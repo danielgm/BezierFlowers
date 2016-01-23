@@ -2,6 +2,7 @@
 import themidibus.*;
 
 PImage background;
+PVector center;
 
 InterferingBeziers beziers;
 MidiBus bus;
@@ -16,10 +17,14 @@ color strokeColor, backgroundColor0, backgroundColor1;
 void setup() {
   size(640, 640, P2D);
 
-  background = loadImage("dogmountain.jpg");
+  background = loadImage("zebra.jpg");
+  center = new PVector(width/2, height/2);
 
+  JSONObject json = loadJSONObject("settings.json");
   beziers = new InterferingBeziers();
-  beziers.updateFromJSONObject(loadJSONObject("settings.json"));
+  beziers.updateFromJSONObject(json.getJSONObject("beziers"));
+  center.x = json.getFloat("centerX");
+  center.y = json.getFloat("centerY");
 
   MidiBus.list();
   bus = new MidiBus(this, 0, 1);
@@ -81,7 +86,7 @@ void drawInterference() {
   g.strokeWeight(4);
 
   g.pushMatrix();
-  g.translate(width/2, height/2);
+  g.translate(center.x, center.y);
 
   beziers.draw(g);
 
@@ -95,12 +100,25 @@ void keyReleased() {
       save(fileNamer.next());
       break;
     case 's':
-      saveJSONObject(beziers.toJSONObject(), settingsFileNamer.next());
+      saveJSONObject(toJSONObject(), settingsFileNamer.next());
       break;
   }
 }
 
+void mouseReleased() {
+  center.x = mouseX;
+  center.y = mouseY;
+}
+
 void controllerChange(int channel, int number, int value) {
   beziers.controllerChange(channel, number, value);
-  saveJSONObject(beziers.toJSONObject(), "settings.json");
+  saveJSONObject(toJSONObject(), "settings.json");
+}
+
+JSONObject toJSONObject() {
+  JSONObject json = new JSONObject();
+  json.setJSONObject("beziers", beziers.toJSONObject());
+  json.setFloat("centerX", center.x);
+  json.setFloat("centerY", center.y);
+  return json;
 }
