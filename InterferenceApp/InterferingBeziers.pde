@@ -8,6 +8,7 @@ class InterferingBeziers {
   BezierFlower bezierFlower1;
 
   float scaleFactor;
+  float scaleExponentFactor;
   float xOffset;
   float yOffset;
   float rotationOffset;
@@ -33,7 +34,7 @@ class InterferingBeziers {
   void draw(PGraphics g) {
     for (int i = 0; i < numFlowers; i++) {
       g.pushMatrix();
-      g.scale(scaleFactor * i / numFlowers);
+      g.scale(scaleFactor * (pow(2, (float)i / numFlowers * scaleExponentFactor) - 1));
       g.rotate(i * rotationDelta);
 
       bezierFlower0.draw(g);
@@ -57,6 +58,7 @@ class InterferingBeziers {
 
     json.setInt("numFlowers", numFlowers);
     json.setFloat("scaleFactor", scaleFactor);
+    json.setFloat("scaleExponentFactor", scaleExponentFactor);
     json.setFloat("xOffset", xOffset);
     json.setFloat("yOffset", yOffset);
     json.setFloat("rotationOffset", rotationOffset);
@@ -71,6 +73,7 @@ class InterferingBeziers {
 
     numFlowers = json.getInt("numFlowers");
     scaleFactor = json.getFloat("scaleFactor");
+    scaleExponentFactor = json.getFloat("scaleExponentFactor");
     xOffset = json.getFloat("xOffset");
     yOffset = json.getFloat("yOffset");
     rotationOffset = json.getFloat("rotationOffset");
@@ -157,31 +160,34 @@ class InterferingBeziers {
         println("num flowers", value);
         numFlowers = floor(value);
         break;
-
       case 18:
-        value = midiMap(midiValue, 0, 0.2 * 2 * PI / bezierFlower0.numPoints());
-        println("rotation offset", value * 180 / PI);
-        rotationOffset = value;
-        break;
-      case 19:
-        value = midiMap(midiValue, -0.01, 0.01 * PI);
-        println("rotation delta", value * 180 / PI);
-        rotationDelta = value;
-        break;
-
-      case 20:
-        value = midiMap(midiValue, -0.001, 0.001) * PI;
-        println("rotation delta offset", value * 180 / PI);
-        rotationDeltaOffset = value;
-        break;
-      case 21:
         value = midiMap(midiValue, 0.1, 1.5);
         println("scale factor", value);
         scaleFactor = value;
         break;
-
-      case 22:
+      case 19:
+        value = midiMap(midiValue, 0.5, 2.0);
+        println("scale exponent factor", value);
+        scaleExponentFactor = value;
         break;
+
+
+      case 20:
+        value = midiMap(midiValue, 0, 0.2 * 2 * PI / bezierFlower0.numPoints());
+        println("rotation offset", value * 180 / PI);
+        rotationOffset = value;
+        break;
+      case 21:
+        value = midiMap(midiValue, -0.01, 0.01 * PI);
+        println("rotation delta", value * 180 / PI);
+        rotationDelta = value;
+        break;
+      case 22:
+        value = midiMap(midiValue, -0.001, 0.001) * PI;
+        println("rotation delta offset", value * 180 / PI);
+        rotationDeltaOffset = value;
+        break;
+
       case 23:
         break;
 

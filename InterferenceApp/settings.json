@@ -1,31 +1,32 @@
 {
   "beziers": {
-    "yOffset": 0.625,
-    "rotationDelta": 3.042072057723999E-5,
-    "xOffset": 0.9375,
-    "scaleFactor": 0.10000000149011612,
-    "numFlowers": 296,
+    "yOffset": 3.4375,
+    "rotationDelta": -0.0012638270854949951,
+    "xOffset": 0,
+    "scaleFactor": 0.8218750357627869,
+    "scaleExponentFactor": 1.4,
+    "numFlowers": 366,
     "flower1": {
       "numPoints": 3,
-      "innerControlDistanceFactor": 0.06346874684095383,
-      "outerRadius": 732.5,
-      "innerControlRotation": -0.5890486240386963,
+      "innerControlDistanceFactor": 0.6725390553474426,
+      "outerRadius": 762.5,
+      "innerControlRotation": 0,
       "outerControlRotation": 0,
-      "outerControlDistanceFactor": 0.5319843292236328,
-      "innerRadius": 1025
+      "outerControlDistanceFactor": 0.172789067029953,
+      "innerRadius": 875
     },
-    "rotationDeltaOffset": -9.817478712648153E-5,
-    "rotationOffset": 0.02356194704771042,
+    "rotationDeltaOffset": 1.9634957425296307E-4,
+    "rotationOffset": 0,
     "flower0": {
       "numPoints": 3,
-      "innerControlDistanceFactor": 0.06346874684095383,
-      "outerRadius": 732.5,
-      "innerControlRotation": -0.5890486240386963,
+      "innerControlDistanceFactor": 0.6725390553474426,
+      "outerRadius": 762.5,
+      "innerControlRotation": 0,
       "outerControlRotation": 0,
-      "outerControlDistanceFactor": 0.5319843292236328,
-      "innerRadius": 1025
+      "outerControlDistanceFactor": 0.172789067029953,
+      "innerRadius": 875
     }
   },
-  "centerX": 200,
-  "centerY": 200,
+  "centerY": 274,
+  "centerX": 236
 }
